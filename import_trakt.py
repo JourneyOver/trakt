@@ -53,7 +53,7 @@ _trakt = {
 _headers = {
         'Accept'            : 'application/json',   # required per API
         'Content-Type'      : 'application/json',   # required per API
-        'User-Agent'        : 'Tratk importer',     # User-agent
+        'User-Agent'        : 'Trakt importer',     # User-agent
         'Connection'        : 'Keep-Alive',         # Thanks to urllib3, keep-alive is 100% automatic within a session!
         'trakt-api-version' : '2',                  # required per API
         'trakt-api-key'     : '',                   # required per API

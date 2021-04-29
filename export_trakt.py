@@ -51,7 +51,7 @@ _trakt = {
 _headers = {
         'Accept'            : 'application/json',   # required per API
         'Content-Type'      : 'application/json',   # required per API
-        'User-Agent'        : 'Tratk importer',     # User-agent
+        'User-Agent'        : 'Trakt importer',     # User-agent
         'Connection'        : 'Keep-Alive',         # Thanks to urllib3, keep-alive is 100% automatic within a session!
         'trakt-api-version' : '2',                  # required per API
         'trakt-api-key'     : '',                   # required per API
@@ -439,11 +439,19 @@ def main():
             # If movie or show 
             if options.type[:-1] != "episode" and 'imdb' in data[options.type[:-1]]['ids']:
                 find_dupids.append(data[options.type[:-1]]['ids']['imdb'])
-                export_csv.append({ 'imdb' : data[options.type[:-1]]['ids']['imdb'],
-                                    'trakt' : data[options.type[:-1]]['ids']['trakt'],
-                                    options.time : data[options.time],
-                                    'title' : data[options.type[:-1]]['title']})
-            # If episode
+                if options.type == "movies":
+                    export_csv.append({ 'imdb' : data[options.type[:-1]]['ids']['imdb'],
+                                        'tmdb' : data[options.type[:-1]]['ids']['tmdb'],
+                                        'trakt_id' : data[options.type[:-1]]['ids']['trakt'],
+                                        options.time : data[options.time],
+                                        'title' : data[options.type[:-1]]['title']})
+                if options.type == "shows":
+                    export_csv.append({ 'imdb' : data[options.type[:-1]]['ids']['imdb'],
+                                        'tmdb' : data[options.type[:-1]]['ids']['tmdb'],
+                                        'tvdb' : data[options.type[:-1]]['ids']['tvdb'],
+                                        'trakt_id' : data[options.type[:-1]]['ids']['trakt'],
+                                        options.time : data[options.time],
+                                        'title' : data[options.type[:-1]]['title']})
             elif 'tmdb' in data[options.type[:-1]]['ids']:
                 find_dupids.append(data[options.type[:-1]]['ids']['tmdb'])
                 if not data['episode']['title']: data['episode']['title'] = "no episode title"
